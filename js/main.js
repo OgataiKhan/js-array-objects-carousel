@@ -131,7 +131,7 @@ const reverseBtn = document.getElementById('reverse');
 // Start
 startBtn.addEventListener('click', function() {
     clearInterval(autoplayFn);
-    autoplayFn = setInterval(nextFn, 3000);
+    autoplayFn = setInterval(autoplayAction, 3000);
     stopBtn.innerHTML = '&#9208;';
 });
 // Stop
