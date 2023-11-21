@@ -1,7 +1,10 @@
 # Carosello Array di Oggetti
 
-In this project an array of objects is used to feed data to an image carousel.
+This is an application designed to display a series of images in a slideshow format. It features autoplay functionality, manual navigation through next and previous buttons as well as by clicking directly on the thumbnails, and the ability to pause autoplay or reverse its direction.
+
+## Workflow (starting from previous repo)
 
 1. Create an array of objects containing URLs, titles, and descriptions.  
-2. Use the newly created array to populate the carousel. Make the text boxes change together with the images and thumbnails when clicking the arrows.  
-3. Add a button that inverts the autoplay direction.
+2. Use the newly created array to populate the carousel using templates.  
+3. Add a function that changes the direction of autoplay.  
+4. Add a button that toggles said direction.  
