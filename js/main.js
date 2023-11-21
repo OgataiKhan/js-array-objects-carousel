@@ -27,17 +27,61 @@ function nextFn() {
     domThumbnails[currentSlide].classList.add('highlighted');
 }
 
-// VARIABLES
-const images = ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg'];
-const items = document.querySelector('.items');
-let currentSlide = 0;
-const thumbnails = document.querySelector('.thumbnails');
+// DATA
+const imageData = [
+    {
+        image: 'img/01.jpg',
+        title: "Meet Bob",
+        description: "Bob is a developer. Bob always remembers to feed his rubber duck. Be like Bob."
+    },
+    {
+        image: 'img/02.jpg',
+        title: "Bob is a digital nomad",
+        description: "He lives in a tiny Swiss lakeside town."
+    },
+    {
+        image: 'img/03.jpg',
+        title: "Bob works remotely",
+        description: "He builds websites for a big London-based company."
+    },
+    {
+        image: 'img/04.jpg',
+        title: "Bob often works until late",
+        description: "All that code is not going to write itself."
+    },
+    {
+        image: 'img/05.jpg',
+        title: "Bob doesn't like bugs",
+        description: "If the console displays that bloody error message one more time he swears he's dropping everything and moving to the Bahamas."
+    }
+];
 
-// Add items and thumbnails to DOM
-for (let i = 0; i < images.length; i++) {
-    items.innerHTML += `<div class="item"><img src="img/${images[i]}" alt="Image ${i + 1}"></div>`;
-    thumbnails.innerHTML += `<div class="thumbnail"><img src="img/${images[i]}" alt="Image ${i + 1} thumbnail"></div>`
-}
+// VARIABLES
+// const images = ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg'];
+const items = document.querySelector('.items');
+const thumbnails = document.querySelector('.thumbnails');
+let currentSlide = 0;
+
+// Templates
+const itemTemplate = document.getElementById('itemTemplate').content;
+const thumbnailTemplate = document.getElementById('thumbnailTemplate').content;
+
+// Add items and thumbnails to DOM using templates
+imageData.forEach((element, index) => {
+    // Images, titles, & descriptions
+    const itemNode = itemTemplate.cloneNode(true);
+    itemNode.querySelector('img').src = element.image;
+    itemNode.querySelector('img').alt = `Image ${index + 1}`;
+    itemNode.querySelector('.textbox h2').textContent = element.title;
+    itemNode.querySelector('.textbox p').textContent = element.description;
+    items.appendChild(itemNode);
+
+    // Thumbnails
+    const thumbnailNode = thumbnailTemplate.cloneNode(true);
+    thumbnailNode.querySelector('img').src = element.image;
+    thumbnailNode.querySelector('img').alt = `Image ${index + 1} thumbnail`;
+    thumbnails.appendChild(thumbnailNode);
+});
 
 // Add "active" and "highlighted" classes to the first item and thumbnail respectively
 const firstItem = items.querySelector('.item');
