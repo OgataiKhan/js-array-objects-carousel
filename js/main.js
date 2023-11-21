@@ -27,6 +27,15 @@ function nextFn() {
     domThumbnails[currentSlide].classList.add('highlighted');
 }
 
+// Autoplay function
+function autoplayAction() {
+    if (autoplayDirection === 'forward') {
+        nextFn();
+    } else {
+        prevFn();
+    }
+}
+
 // DATA
 const imageData = [
     {
@@ -57,15 +66,16 @@ const imageData = [
 ];
 
 // VARIABLES
-// const images = ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg'];
 const items = document.querySelector('.items');
 const thumbnails = document.querySelector('.thumbnails');
 let currentSlide = 0;
+let autoplayDirection = 'forward';
 
 // Templates
 const itemTemplate = document.getElementById('itemTemplate').content;
 const thumbnailTemplate = document.getElementById('thumbnailTemplate').content;
 
+// EXECUTION
 // Add items and thumbnails to DOM using templates
 imageData.forEach((element, index) => {
     // Images, titles, & descriptions
@@ -111,19 +121,31 @@ for (let i = 0; i < domThumbnails.length; i++) {
 }
 
 // Autoplay
-let autoplayFn = setInterval(nextFn, 3_000);
-autoplayFn;
+let autoplayFn = setInterval(autoplayAction, 3_000);
 
 // Buttons
 const startBtn = document.getElementById('start');
 const stopBtn = document.getElementById('stop');
+const reverseBtn = document.getElementById('reverse');
 
+// Start
 startBtn.addEventListener('click', function() {
     clearInterval(autoplayFn);
     autoplayFn = setInterval(nextFn, 3000);
     stopBtn.innerHTML = '&#9208;';
 });
+// Stop
 stopBtn.addEventListener('click', function() {
     clearInterval(autoplayFn);
     stopBtn.innerHTML = '&#9632;';
+});
+// Reverse
+reverseBtn.addEventListener('click', function() {
+    if (autoplayDirection === 'forward') {
+        autoplayDirection = 'backward';
+        reverseBtn.innerHTML = '&#8635;';
+    } else {
+        autoplayDirection = 'forward';
+        reverseBtn.innerHTML = '&#8634;';
+    }
 });
